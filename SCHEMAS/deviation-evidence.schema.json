@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Kelronmos/SWI-Deviation-Device/schemas/deviation-evidence.schema.json",
+  "title": "DEVIATION_EVIDENCE",
+  "type": "object",
+  "required": [
+    "event_id",
+    "device_id",
+    "baseline_id",
+    "baseline_version",
+    "control_id",
+    "expected_state",
+    "observed_state",
+    "observation_method",
+    "observation_time",
+    "evidence_hash",
+    "evidence_source",
+    "freshness_status",
+    "deviation_class",
+    "severity",
+    "joe_assessment",
+    "alita_assessment"
+  ],
+  "properties": {
+    "event_id": { "type": "string" },
+    "device_id": { "type": "string" },
+    "baseline_id": { "type": "string" },
+    "baseline_version": { "type": "string" },
+    "control_id": { "type": "string" },
+    "expected_state": { "type": ["string", "object", "null"] },
+    "observed_state": { "type": ["string", "object", "null"] },
+    "observation_method": { "type": "string" },
+    "observation_time": { "type": "string", "format": "date-time" },
+    "evidence_hash": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "evidence_source": { "type": "string" },
+    "freshness_status": {
+      "type": "string",
+      "enum": ["CURRENT", "STALE", "UNKNOWN"]
+    },
+    "deviation_class": {
+      "type": "string",
+      "enum": ["NORMAL", "DRIFT", "CRITICAL", "AUTHORIZED_DEVIATION", "UNKNOWN", "STALE", "INVALID"]
+    },
+    "severity": { "type": "string" },
+    "joe_assessment": { "type": "object" },
+    "alita_assessment": { "type": "object" },
+    "authority_reference": { "type": ["string", "null"] },
+    "replay_reference": { "type": ["string", "null"] },
+    "decision_record": { "type": ["object", "null"] }
+  },
+  "additionalProperties": false
+}

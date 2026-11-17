@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Kelronmos/SWI-Deviation-Device/schemas/device-observation.schema.json",
+  "title": "DEVICE_OBSERVATION",
+  "type": "object",
+  "required": [
+    "observation_id",
+    "device_id",
+    "observation_time",
+    "observation_method",
+    "observed_domains",
+    "freshness_status",
+    "evidence_hash"
+  ],
+  "properties": {
+    "observation_id": { "type": "string" },
+    "device_id": { "type": "string" },
+    "observation_time": { "type": "string", "format": "date-time" },
+    "observation_method": { "type": "string" },
+    "observed_domains": {
+      "type": "object",
+      "properties": {
+        "identity": { "type": "object" },
+        "hardware": { "type": "object" },
+        "operating_system": { "type": "object" },
+        "software": { "type": "object" },
+        "permissions": { "type": "object" },
+        "connectivity": { "type": "object" },
+        "runtime": { "type": "object" },
+        "workflow": { "type": "object" },
+        "human_authority": { "type": "object" }
+      }
+    },
+    "freshness_status": {
+      "type": "string",
+      "enum": ["CURRENT", "STALE", "UNKNOWN"]
+    },
+    "evidence_hash": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "unknown_controls": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  },
+  "additionalProperties": false
+}
